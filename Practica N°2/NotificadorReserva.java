@@ -5,7 +5,7 @@ public class NotificadorReserva {
         this.canalNotificacion = canalNotificacion;
     }
 
-    public void notificar(String mensaje) {
+    public void enviarNotificacion(String mensaje) {
         canalNotificacion.enviarNotificacion(mensaje);
     }
 }

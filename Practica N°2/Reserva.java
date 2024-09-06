@@ -3,6 +3,7 @@ public class Reserva {
     private String fechaInicio;
     private String fechaFin;
     private PoliticaCancelacion politicaCancelacion;
+    private String notificacion;
 
     public Reserva(Habitacion habitacion, String fechaInicio, String fechaFin, PoliticaCancelacion politicaCancelacion) {
         this.habitacion = habitacion;
@@ -11,15 +12,6 @@ public class Reserva {
         this.politicaCancelacion = politicaCancelacion;
     }
 
-    public void cancelarReserva() {
-        if (politicaCancelacion.puedeCancelar(this)) {
-            System.out.println("Reserva cancelada.");
-        } else {
-            System.out.println("No se puede cancelar la reserva.");
-        }
-    }
-
-    // Getters y Setters
     public Habitacion getHabitacion() {
         return habitacion;
     }
@@ -34,5 +26,17 @@ public class Reserva {
 
     public PoliticaCancelacion getPoliticaCancelacion() {
         return politicaCancelacion;
+    }
+
+    public String getNotificacion() {
+        return notificacion;
+    }
+
+    public void cancelarReserva() {
+        System.out.println("Reserva cancelada.");
+    }
+
+    public void setNotificacion(String notificacion) {
+        this.notificacion = notificacion;
     }
 }
