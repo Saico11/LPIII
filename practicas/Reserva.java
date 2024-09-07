@@ -13,9 +13,8 @@ public class Reserva {
         this.fechaFin = fechaFin;
     }
 
-    // Método para verificar si las fechas de esta reserva se superponen con las fechas proporcionadas
     public boolean conflictCon(Date inicio, Date fin) {
-        return (inicio.before(fechaFin) && fin.after(fechaInicio));
+        return true;
     }
 
     // Getters y setters

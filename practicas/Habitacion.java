@@ -24,7 +24,7 @@ public class Habitacion {
     public boolean isDisponible() {
         return disponible;
     }
-    
+
     public double calcularPrecio(Date fechaEntrada, Date fechaSalida) {
         double precio = precioBase;
         for (Promocion promocion : promociones) {
@@ -35,8 +35,7 @@ public class Habitacion {
         return precio;
     }
 
-    public InformeOcupacion generarInformeOcupacion() {
-        InformeOcupacion informe = new InformeOcupacion();
-        return informe;
+    public void generarInformeOcupacion() {
+        System.out.println("Mostrar");
     }
 }
