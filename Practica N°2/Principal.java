@@ -1,151 +1,101 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Principal {
     public static void main(String[] args) {
+        // Elegir el canal de notificación (correo o SMS)
+        CanalNotificacion canalNotificacion = new EnviadorCorreo(); // O usar EnviadorSMS
+        Controlador controlador = new Controlador(canalNotificacion);
         Scanner scanner = new Scanner(System.in);
-
-        // Crear instancias de gestores y políticas
-        GestorDisponibilidadHabitacion gestorDisponibilidad = new GestorDisponibilidadHabitacion();
-        PoliticaCancelacion politicaFlexible = new PoliticaCancelacionFlexible();
-        PoliticaCancelacion politicaModerada = new PoliticaCancelacionModerada();
-        PoliticaCancelacion politicaEstricta = new PoliticaCancelacionEstricta();
-
-        // Crear habitaciones
-        Habitacion habitacion1 = new Habitacion("Suite", 150.0, gestorDisponibilidad);
-        Habitacion habitacion2 = new Habitacion("Doble", 100.0, gestorDisponibilidad);
-
-        // Crear controladores
-        Controlador controlador = new Controlador(gestorDisponibilidad);
-
-        // Crear notificador
-        CanalNotificacion correo = new EnviadorCorreo();
-        NotificadorReserva notificador = new NotificadorReserva(correo);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         boolean salir = false;
-        while (!salir) {
-            System.out.println("\n--- Menú de Gestión de Reservas ---");
-            System.out.println("1. Crear Reserva");
-            System.out.println("2. Cancelar Reserva");
-            System.out.println("3. Mostrar Habitación Reservada");
-            System.out.println("4. Notificar Reserva");
-            System.out.println("5. Salir");
-            System.out.print("Elige una opción: ");
 
+        while (!salir) {
+            System.out.println("Sistema de Gestión de Reservas");
+            System.out.println("1. Registrar Cliente");
+            System.out.println("2. Registrar Reserva");
+            System.out.println("3. Consultar Historial de Reservas");
+            System.out.println("4. Asignar Personal de Limpieza");
+            System.out.println("5. Consultar Cargas de Trabajo del Personal de Limpieza");
+            System.out.println("6. Salir");
+            System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+            scanner.nextLine();  // Limpiar buffer
 
             switch (opcion) {
                 case 1:
-                    // Crear reserva
-                    Habitacion habitacion;
-                    while (true) {
-                        System.out.print("Ingrese el tipo de habitación (Suite/Doble): ");
-                        String tipo = scanner.nextLine();
-                        if (tipo.equalsIgnoreCase("Suite")) {
-                            habitacion = habitacion1;
-                            break;
-                        } else if (tipo.equalsIgnoreCase("Doble")) {
-                            habitacion = habitacion2;
-                            break;
-                        } else {
-                            System.out.println("Tipo de habitación no válido. Por favor ingrese Suite o Doble.");
-                        }
-                    }
-
-                    String fechaInicio;
-                    String fechaFin;
-                    while (true) {
-                        System.out.print("Ingrese la fecha de inicio (YYYY-MM-DD): ");
-                        fechaInicio = scanner.nextLine();
-                        System.out.print("Ingrese la fecha de fin (YYYY-MM-DD): ");
-                        fechaFin = scanner.nextLine();
-
-                        if (esFechaValida(fechaInicio) && esFechaValida(fechaFin)) {
-                            break;
-                        } else {
-                            System.out.println("Fechas no válidas. Asegúrese de usar el formato YYYY-MM-DD.");
-                        }
-                    }
-
-                    System.out.println("Seleccione la política de cancelación:");
-                    System.out.println("1. Flexible");
-                    System.out.println("2. Moderada");
-                    System.out.println("3. Estricta");
-                    int politica = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar el buffer
-
-                    PoliticaCancelacion politicaSeleccionada;
-                    switch (politica) {
-                        case 1:
-                            politicaSeleccionada = politicaFlexible;
-                            break;
-                        case 2:
-                            politicaSeleccionada = politicaModerada;
-                            break;
-                        case 3:
-                            politicaSeleccionada = politicaEstricta;
-                            break;
-                        default:
-                            System.out.println("Política de cancelación no válida. Se aplicará la política Flexible por defecto.");
-                            politicaSeleccionada = politicaFlexible;
-                    }
-
-                    controlador.crearReserva(habitacion, fechaInicio, fechaFin, politicaSeleccionada);
-                    System.out.println("Reserva creada con éxito.");
+                    System.out.print("Ingrese el DNI del cliente: ");
+                    String dni = scanner.nextLine();
+                    System.out.print("Ingrese el nombre del cliente: ");
+                    String nombre = scanner.nextLine();
+                    controlador.registrarCliente(dni, nombre);
                     break;
-
                 case 2:
-                    // Cancelar reserva
-                    System.out.println("Ingrese el tipo de habitación para cancelar la reserva (Suite/Doble): ");
-                    String tipoCancelacion = scanner.nextLine();
-                    habitacion = tipoCancelacion.equalsIgnoreCase("Suite") ? habitacion1 : habitacion2;
+                    System.out.print("Ingrese el DNI del cliente: ");
+                    dni = scanner.nextLine();
+                    System.out.print("Ingrese el código de la habitación: ");
+                    String codigoHabitacion = scanner.nextLine();
+                    System.out.print("Ingrese la fecha de inicio (dd/MM/yyyy): ");
+                    String fechaInicioStr = scanner.nextLine();
+                    System.out.print("Ingrese la fecha de fin (dd/MM/yyyy): ");
+                    String fechaFinStr = scanner.nextLine();
 
-                    Reserva reserva = new Reserva(habitacion, "2024-12-20", "2024-12-25", politicaFlexible); // Datos de ejemplo
-                    reserva.cancelarReserva();
-                    System.out.println("Reserva cancelada con éxito.");
-                    break;
+                    try {
+                        System.out.println("Seleccione la política de cancelación:");
+                        System.out.println("1. Flexible");
+                        System.out.println("2. Moderada");
+                        System.out.println("3. Estricta");
+                        int tipoPolitica = scanner.nextInt();
+                        scanner.nextLine();  // Limpiar buffer
 
-                case 3:
-                    // Mostrar habitación reservada
-                    Reserva reservaActual = controlador.obtenerReservaActual(); // Asumiendo que el controlador tiene un método para obtener la reserva actual
-                    if (reservaActual != null) {
-                        System.out.println("Habitación reservada:");
-                        System.out.println("Tipo: " + reservaActual.getHabitacion().getTipo());
-                        System.out.println("Fecha de inicio: " + reservaActual.getFechaInicio());
-                        System.out.println("Fecha de fin: " + reservaActual.getFechaFin());
-                        System.out.println("Política de cancelación: " + reservaActual.getPoliticaCancelacion().getClass().getSimpleName());
-                        System.out.println("Notificación enviada: " + reservaActual.getNotificacion());
-                    } else {
-                        System.out.println("No hay reservas actuales.");
+                        PoliticaCancelacion politica;
+                        if (tipoPolitica == 1) {
+                            politica = new PoliticaCancelacionFlexible();
+                        } else if (tipoPolitica == 2) {
+                            politica = new PoliticaCancelacionModerada();
+                        } else {
+                            politica = new PoliticaCancelacionEstricta();
+                        }
+
+                        controlador.registrarReserva(dni, codigoHabitacion, sdf.parse(fechaInicioStr), sdf.parse(fechaFinStr), politica);
+                    } catch (ParseException e) {
+                        System.out.println("Error en el formato de fecha. Intente de nuevo.");
                     }
                     break;
-
+                case 3:
+                    System.out.print("Ingrese el DNI del cliente: ");
+                    dni = scanner.nextLine();
+                    controlador.consultarHistorialReservas(dni);
+                    break;
                 case 4:
-                    // Notificar reserva
-                    System.out.print("Ingrese el mensaje de notificación: ");
-                    String mensaje = scanner.nextLine();
-                    controlador.notificarReserva(notificador, mensaje);
-                    System.out.println("Notificación enviada.");
+                    System.out.print("Ingrese el DNI del personal de limpieza: ");
+                    String dniLimpieza = scanner.nextLine();
+                    System.out.print("Ingrese el código de la habitación: ");
+                    codigoHabitacion = scanner.nextLine();
+                    controlador.asignarLimpieza(dniLimpieza, codigoHabitacion);
                     break;
-
                 case 5:
-                    // Salir
-                    salir = true;
-                    System.out.println("Saliendo del sistema...");
+                    System.out.print("Ingrese el DNI del personal de limpieza: ");
+                    dniLimpieza = scanner.nextLine();
+                    PersonalLimpieza personalLimpieza = controlador.getPersonalLimpieza(dniLimpieza);
+                    if (personalLimpieza != null) {
+                        personalLimpieza.generarReporteCargasTrabajo();
+                    } else {
+                        System.out.println("Personal de limpieza no encontrado.");
+                    }
                     break;
-
+                case 6:
+                    salir = true;
+                    break;
                 default:
-                    System.out.println("Opción no válida, por favor intente de nuevo.");
+                    System.out.println("Opción no válida.");
+                    break;
             }
+            System.out.println();
         }
 
         scanner.close();
-    }
-
-    // Método para validar el formato de la fecha (YYYY-MM-DD)
-    private static boolean esFechaValida(String fecha) {
-        String regex = "\\d{4}-\\d{2}-\\d{2}";
-        return Pattern.matches(regex, fecha);
     }
 }

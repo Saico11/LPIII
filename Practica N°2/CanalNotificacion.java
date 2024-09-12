@@ -1,4 +1,3 @@
 public interface CanalNotificacion {
-    void enviarNotificacion(String mensaje);
+    void enviar(String mensaje);
 }
-

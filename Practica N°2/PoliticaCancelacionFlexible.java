@@ -1,8 +1,6 @@
 public class PoliticaCancelacionFlexible implements PoliticaCancelacion {
     @Override
-    public boolean puedeCancelar(Reserva reserva) {
-        // Lógica para política de cancelación flexible
-        return true; // Ejemplo
+    public double calcularPenalidad(Reserva reserva) {
+        return 0; // Sin penalidad si cancela con anticipación
     }
 }
-

@@ -1,7 +1,7 @@
 public class EnviadorSMS implements CanalNotificacion {
     @Override
-    public void enviarNotificacion(String mensaje) {
-        // Lógica para enviar SMS
+    public void enviar(String mensaje) {
         System.out.println("Enviando SMS: " + mensaje);
+        // Lógica de envío de SMS
     }
 }

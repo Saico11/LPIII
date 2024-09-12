@@ -1,7 +1,7 @@
 public class EnviadorCorreo implements CanalNotificacion {
     @Override
-    public void enviarNotificacion(String mensaje) {
-        // Lógica para enviar correo electrónico
+    public void enviar(String mensaje) {
         System.out.println("Enviando correo: " + mensaje);
+        // Lógica de envío de correo
     }
 }

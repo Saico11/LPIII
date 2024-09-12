@@ -1,11 +1,11 @@
 public class NotificadorReserva {
-    private CanalNotificacion canalNotificacion;
+    private CanalNotificacion canal;
 
-    public NotificadorReserva(CanalNotificacion canalNotificacion) {
-        this.canalNotificacion = canalNotificacion;
+    public NotificadorReserva(CanalNotificacion canal) {
+        this.canal = canal;
     }
 
     public void enviarNotificacion(String mensaje) {
-        canalNotificacion.enviarNotificacion(mensaje);
+        canal.enviar(mensaje);
     }
 }

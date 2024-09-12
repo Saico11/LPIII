@@ -1,32 +1,26 @@
-import java.util.*;
+import java.util.Map;
 
 public class GestorDisponibilidadHabitacion {
-    private List<Reserva> reservas;
-    private List<String> calendarioPromociones;
+    private Map<String, Habitacion> habitaciones;
 
-    public GestorDisponibilidadHabitacion() {
-        this.reservas = new ArrayList<>();
-        this.calendarioPromociones = new ArrayList<>();
-        // Datos de ejemplo
-        calendarioPromociones.add("2024-12-25");
+    public GestorDisponibilidadHabitacion(Map<String, Habitacion> habitaciones) {
+        this.habitaciones = habitaciones;
     }
 
-    public boolean verificarDisponibilidad(Habitacion habitacion, String fechaInicio, String fechaFin) {
-        // Lógica simplificada para verificar disponibilidad
-        for (Reserva reserva : reservas) {
-            if (reserva.getHabitacion().equals(habitacion) && 
-                ((fechaInicio.compareTo(reserva.getFechaFin()) <= 0) && (fechaFin.compareTo(reserva.getFechaInicio()) >= 0))) {
-                return false;
-            }
+    public boolean estaDisponible(String codigoHabitacion) {
+        Habitacion habitacion = habitaciones.get(codigoHabitacion);
+        if (habitacion == null) {
+            System.out.println("Habitación no encontrada.");
+            return false;
         }
-        return true;
+        return habitacion.estaDisponible();
     }
 
-    public void agregarReserva(Reserva reserva) {
-        reservas.add(reserva);
-    }
-
-    public List<String> getCalendarioPromociones() {
-        return calendarioPromociones;
+    public void agregarReserva(String codigoHabitacion, Reserva reserva) {
+        Habitacion habitacion = habitaciones.get(codigoHabitacion);
+        if (habitacion != null) {
+            habitacion.agregarReserva(reserva);
+        }
     }
 }
+
