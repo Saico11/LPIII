@@ -7,7 +7,6 @@ public class Par<F, S> {
         this.segundo = segundo;
     }
 
-    // Métodos para obtener y establecer el primer elemento
     public F getPrimero() {
         return primero;
     }
@@ -16,7 +15,6 @@ public class Par<F, S> {
         this.primero = primero;
     }
 
-    // Métodos para obtener y establecer el segundo elemento
     public S getSegundo() {
         return segundo;
     }
@@ -25,7 +23,6 @@ public class Par<F, S> {
         this.segundo = segundo;
     }
 
-    // Método para comparar si dos pares son iguales
     public boolean esIgual(Par<F, S> otroPar) {
         if (this.primero.equals(otroPar.getPrimero()) && this.segundo.equals(otroPar.getSegundo())) {
             return true;
@@ -33,7 +30,6 @@ public class Par<F, S> {
         return false;
     }
 
-    // Método toString para mostrar el par
     @Override
     public String toString() {
         return "(Primero: " + primero + ", Segundo: " + segundo + ")";
