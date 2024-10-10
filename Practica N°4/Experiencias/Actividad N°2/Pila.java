@@ -25,12 +25,12 @@ public class Pila<E> {
         return elementos.remove(elementos.size() - 1);
     }
 
-    public boolean contains(E elemento) {
+    public boolean contains(E elemento) {  //verifica
         return elementos.contains(elemento);
     }
 
     public int size() {
-        return elementos.size();
+        return elementos.size(); //retorna numero de elementos
     }
 
     public E peek() {
