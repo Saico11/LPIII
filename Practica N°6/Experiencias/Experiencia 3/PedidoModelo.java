@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 public class PedidoModelo {
     private List<Pedido> pedidos;
-    private List<Pedido> historial; // Nuevo atributo para el historial de pedidos
+    private List<Pedido> historial; 
 
     public PedidoModelo() {
         pedidos = new ArrayList<>();
@@ -19,7 +19,7 @@ public class PedidoModelo {
         return pedidos;
     }
 
-    // Eliminar un pedido
+   
     public boolean eliminarPedido(String nombrePlato) {
         for (Pedido pedido : pedidos) {
             if (pedido.getNombrePlato().equalsIgnoreCase(nombrePlato)) {
@@ -42,7 +42,7 @@ public class PedidoModelo {
         return false;
     }
     
-    // Marcar un pedido como completo
+  
     public boolean marcarPedidoComoCompleto(String nombrePlato) {
         for (Pedido pedido : pedidos) {
             if (pedido.getNombrePlato().equalsIgnoreCase(nombrePlato)) {
@@ -55,20 +55,20 @@ public class PedidoModelo {
 
     public List<Pedido> obtenerPedidosPorEstado(String estado) {
         return pedidos.stream()
-            .filter(pedido -> pedido.getEstado().equalsIgnoreCase(estado)) // Filtra por estado
+            .filter(pedido -> pedido.getEstado().equalsIgnoreCase(estado))
             .collect(Collectors.toList());
     }
     
     
 
-    // Contar pedidos pendientes
+   
     public int contarPedidosPendientes() {
         return (int) pedidos.stream()
             .filter(pedido -> pedido.getEstado().equalsIgnoreCase("Pendiente"))
             .count();
     }
 
-    // Obtener historial de pedidos
+   
     public List<Pedido> getHistorial() {
         return historial;
     }

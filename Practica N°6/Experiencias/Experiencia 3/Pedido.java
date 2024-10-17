@@ -1,12 +1,12 @@
 public class Pedido {
     private String nombrePlato;
     private String tipoPlato;
-    private String estado; // Nuevo atributo para el estado del pedido
+    private String estado; 
 
     public Pedido(String nombrePlato, String tipoPlato) {
         this.nombrePlato = nombrePlato;
         this.tipoPlato = tipoPlato;
-        this.estado = "Pendiente"; // Estado inicial
+        this.estado = "Pendiente";
     }
 
     public String getNombrePlato() {
@@ -18,14 +18,14 @@ public class Pedido {
     }
 
     public String getEstado() {
-        return estado; // Nuevo método para obtener el estado
+        return estado;
     }
 
     public void marcarComoCompleto() {
-        this.estado = "Completo"; // Cambia el estado a "Completo"
+        this.estado = "Completo"; 
     }
 
     public void marcarComoEliminado() {
-        this.estado = "Eliminado"; // Cambia el estado a "Eliminado"
+        this.estado = "Eliminado"; 
     }
 }

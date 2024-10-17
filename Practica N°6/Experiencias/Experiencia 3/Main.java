@@ -3,6 +3,6 @@ public class Main {
         PedidoModelo modelo = new PedidoModelo();
         PedidoVista vista = new PedidoVista();
         PedidoControlador controlador = new PedidoControlador(modelo, vista);
-        controlador.iniciar(); // Agregar paréntesis para llamar al método
+        controlador.iniciar(); 
     }
 }

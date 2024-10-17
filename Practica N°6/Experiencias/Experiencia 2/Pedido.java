@@ -1,6 +1,6 @@
 public class Pedido {
     private String nombrePlato;
-    private String tipoPlato; // Nuevo atributo para el tipo de plato
+    private String tipoPlato;
 
     public Pedido(String nombrePlato, String tipoPlato) {
         this.nombrePlato = nombrePlato;
@@ -12,6 +12,6 @@ public class Pedido {
     }
 
     public String getTipoPlato() {
-        return tipoPlato; // Nuevo método para obtener el tipo de plato
+        return tipoPlato; 
     }
 }

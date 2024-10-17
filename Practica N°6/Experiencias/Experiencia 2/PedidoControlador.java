@@ -73,7 +73,7 @@ public class PedidoControlador {
                     actualizarPedido(nombreActualizar, nuevoNombrePlato);
                     break;
                 case "5":
-                    String criterioBuscar = vista.solicitarNombrePlato(); // Puede buscar por nombre o tipo
+                    String criterioBuscar = vista.solicitarNombrePlato(); 
                     buscarPedido(criterioBuscar);
                     break;
                 case "6":

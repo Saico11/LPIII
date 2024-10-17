@@ -1,6 +1,6 @@
 public class Item {
     private String nombre;
-    private String tipo; // Arma, Pocion, etc.
+    private String tipo; 
     private String descripcion;
     private int cantidad;
 

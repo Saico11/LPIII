@@ -11,7 +11,7 @@ public class Jugador {
         this.inventario = new InventarioModel();
     }
 
-    // Método para obtener el nombre del jugador
+   
     public String getNombre() {
         return nombre;
     }

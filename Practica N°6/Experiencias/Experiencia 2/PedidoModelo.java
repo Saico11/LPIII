@@ -17,12 +17,12 @@ public class PedidoModelo {
         return pedidos;
     }
 
-    // Eliminar un pedido
+   
     public boolean eliminarPedido(String nombrePlato) {
         return pedidos.removeIf(pedido -> pedido.getNombrePlato().equalsIgnoreCase(nombrePlato));
     }
 
-    // Actualizar un pedido
+   
     public boolean actualizarPedido(String nombrePlato, String nuevoNombrePlato) {
         for (Pedido pedido : pedidos) {
             if (pedido.getNombrePlato().equalsIgnoreCase(nombrePlato)) {
@@ -34,7 +34,7 @@ public class PedidoModelo {
         return false;
     }
 
-    // Buscar un pedido
+  
     public List<Pedido> buscarPedido(String criterio) {
         return pedidos.stream()
             .filter(pedido -> pedido.getNombrePlato().equalsIgnoreCase(criterio) ||
@@ -42,7 +42,7 @@ public class PedidoModelo {
             .collect(Collectors.toList());
     }
 
-    // Contar pedidos
+ 
     public int contarPedidos() {
         return pedidos.size();
     }

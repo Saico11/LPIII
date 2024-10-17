@@ -9,7 +9,7 @@ public class Carrito {
     public Carrito() {
         productos = new ArrayList<>();
         descuento = 0;
-        costoEnvio = 5.0; // Costo de envío por defecto
+        costoEnvio = 5.0; 
     }
 
     public void agregarProducto(Producto producto) {
