@@ -45,12 +45,6 @@ public class Personaje {
         }
     }
 
-    public void mejorarAtributos() {
-        this.nivel++;
-        this.salud += 10;  // Ejemplo de mejora de salud
-        this.fuerza += 5;  // Ejemplo de mejora de fuerza
-    }
-
     @Override
     public String toString() {
         return "Personaje{" +

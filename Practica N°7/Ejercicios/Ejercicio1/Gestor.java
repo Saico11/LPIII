@@ -1,49 +1,96 @@
-class GestorPersonajes {
-    private List<Personaje> personajes;
-    private String archivo;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
-    public GestorPersonajes(String archivo) {
+public class Gestor {
+    private List<Personaje> personajes;
+    private final String archivo;
+
+    public Gestor(String archivo) {
         this.archivo = archivo;
         personajes = new ArrayList<>();
-        cargarPersonajesDesdeArchivo();
+        cargarPersonajes();
     }
 
-    public void agregarPersonaje(Personaje personaje) {
-        if (!personajes.contains(personaje)) {
-            personajes.add(personaje);
-            guardarCambios();
-        } else {
-            System.out.println("El personaje ya existe.");
-        }
-    }
+    private void cargarPersonajes() {
+        File file = new File(archivo);
+        if (!file.exists()) return;
 
-    public void modificarPersonaje(String nombre, Personaje nuevoPersonaje) {
-        for (int i = 0; i < personajes.size(); i++) {
-            if (personajes.get(i).getNombre().equals(nombre)) {
-                personajes.set(i, nuevoPersonaje);
-                guardarCambios();
-                return;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                if (datos.length == 4) {
+                    String nombre = datos[0];
+                    int nivel = Integer.parseInt(datos[1]);
+                    int salud = Integer.parseInt(datos[2]);
+                    int fuerza = Integer.parseInt(datos[3]);
+                    personajes.add(new Personaje(nombre, nivel, salud, fuerza));
+                }
             }
+        } catch (IOException e) {
+            System.out.println("Error al cargar personajes: " + e.getMessage());
         }
-        System.out.println("Personaje no encontrado.");
     }
 
-    public void eliminarPersonaje(String nombre) {
-        personajes.removeIf(p -> p.getNombre().equals(nombre));
+    public void agregarPersonaje(String nombre, int nivel, int salud, int fuerza) {
+        if (buscarPersonaje(nombre) != null) {
+            System.out.println("El personaje ya existe.");
+            return;
+        }
+        personajes.add(new Personaje(nombre, nivel, salud, fuerza));
         guardarCambios();
     }
 
-    public void mostrarPersonajes() {
-        for (Personaje personaje : personajes) {
-            System.out.println(personaje);
+    public Personaje buscarPersonaje(String nombre) {
+        for (Personaje p : personajes) {
+            if (p.getNombre().equalsIgnoreCase(nombre)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void modificarPersonaje(String nombre, int nivel, int salud, int fuerza) {
+        Personaje p = buscarPersonaje(nombre);
+        if (p != null) {
+            p.setNivel(nivel);
+            p.setSalud(salud);
+            p.setFuerza(fuerza);
+            guardarCambios();
+        } else {
+            System.out.println("Personaje no encontrado.");
         }
     }
 
-    private void cargarPersonajesDesdeArchivo() {
-        // ... (implementación para leer desde el archivo)
+    public void eliminarPersonaje(String nombre) {
+        Personaje p = buscarPersonaje(nombre);
+        if (p != null) {
+            personajes.remove(p);
+            guardarCambios();
+        } else {
+            System.out.println("Personaje no encontrado.");
+        }
+    }
+
+    public void mostrarPersonajes() {
+        if (personajes.isEmpty()) {
+            System.out.println("No hay personajes disponibles.");
+        } else {
+            for (Personaje p : personajes) {
+                System.out.println(p);
+            }
+        }
     }
 
     private void guardarCambios() {
-        // ... (implementación para guardar los cambios en el archivo)
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+            for (Personaje p : personajes) {
+                bw.write(p.toFileString());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar personajes: " + e.getMessage());
+        }
     }
 }
