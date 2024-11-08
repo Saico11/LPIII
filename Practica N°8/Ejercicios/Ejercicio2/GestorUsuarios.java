@@ -8,7 +8,7 @@ public class GestorUsuarios {
     private List<Usuario> usuarios = new ArrayList<>();
 
     public void cargarUsuariosDesdeBD(Connection connection) {
-        usuarios.clear(); // Limpiamos el arreglo antes de cargar los datos
+        usuarios.clear(); 
         try {
             String query = "SELECT * FROM usuarios";
             Statement statement = connection.createStatement();

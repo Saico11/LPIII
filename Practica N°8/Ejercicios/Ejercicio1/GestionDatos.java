@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class GestionDatos {
 
     private static final String URL = "jdbc:mysql://localhost:3306/gestion_datos";
-    private static final String USER = "root"; // Cambia esto por tu usuario
-    private static final String PASSWORD = "080100"; // Cambia esto por tu contraseña
+    private static final String USER = "root"; 
+    private static final String PASSWORD = "080100"; 
 
     public static void main(String[] args) {
         try {
@@ -59,7 +59,7 @@ public class GestionDatos {
         System.out.print("Ingresa la clave para confirmar: ");
         String clave = scanner.next();
 
-        if (clave.equals("1234")) { // Cambia esta clave si es necesario
+        if (clave.equals("1234")) { 
             try {
                 String sql = "INSERT INTO usuarios (nombre, email, edad) VALUES (?, ?, ?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
