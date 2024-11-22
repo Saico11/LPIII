@@ -23,12 +23,12 @@ public class GraficoTemperaturaApp {
             inputPanel.add(temperaturaFields[i]);
         }
 
-        // Panel para el gráfico
+        // Panel para el grafico
         JPanel graficoPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                // Configurar gráfico
+                // Configurar grafico
                 g.setColor(Color.BLUE);
                 int ancho = getWidth();
                 int alto = getHeight();
@@ -53,7 +53,7 @@ public class GraficoTemperaturaApp {
 
                 int maxTemperatura = 50; // Rango máximo para escalar
 
-                // Dibujar línea de temperaturas
+                // Dibujar linea de temperaturas
                 int separacionY = alto - 2 * margen;
                 int[] puntosX = new int[7];
                 int[] puntosY = new int[7];
@@ -74,7 +74,7 @@ public class GraficoTemperaturaApp {
             }
         };
 
-        // Botón para mostrar el gráfico
+        // Boton para mostrar el grafico
         JButton mostrarGraficoButton = new JButton("Mostrar Gráfico");
         mostrarGraficoButton.addActionListener(e -> graficoPanel.repaint());
 
@@ -87,3 +87,4 @@ public class GraficoTemperaturaApp {
         frame.setVisible(true);
     }
 }
+
