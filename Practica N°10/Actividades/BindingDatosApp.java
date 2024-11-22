@@ -32,14 +32,14 @@ public class BindingDatosApp {
         inputPanel.add(new JLabel("Categoría:"));
         inputPanel.add(categoriaField);
 
-        // Crear botón para actualizar el producto
+        // Crear boton para actualizar el producto
         JButton actualizarButton = new JButton("Actualizar Producto");
 
         // Crear etiqueta para mostrar la información del producto
         JLabel infoLabel = new JLabel(producto.toString());
         infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Agregar funcionalidad al botón
+        // Agregar funcionalidad al boton
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,7 +49,7 @@ public class BindingDatosApp {
                     producto.setCantidadStock(Integer.parseInt(stockField.getText()));
                     producto.setCategoria(categoriaField.getText());
 
-                    // Actualizar la etiqueta con la nueva información
+                    // Actualizar la etiqueta con la nueva informacion
                     infoLabel.setText(producto.toString());
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frame, "Error: Verifica los campos numéricos.", "Error", JOptionPane.ERROR_MESSAGE);

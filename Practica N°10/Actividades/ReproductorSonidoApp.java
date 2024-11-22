@@ -19,7 +19,7 @@ public class ReproductorSonidoApp {
         JButton botonCampana = new JButton("Campana");
         JButton botonExplosion = new JButton("Explosión");
 
-        // Añadir acción a los botones
+        // Añadir accion a los botones
         botonAplausos.addActionListener(e -> aplausos.reproducir());
         botonCampana.addActionListener(e -> campana.reproducir());
         botonExplosion.addActionListener(e -> explosion.reproducir());
